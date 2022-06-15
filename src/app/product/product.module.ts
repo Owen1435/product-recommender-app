@@ -10,6 +10,8 @@ import {ProductsPageEffects} from "./state-management/products-page.effects";
 import {ProductPageSmartComponent} from "./products-page/product-page-smart.component";
 import {ProductPagePresentationComponent} from "./products-page/product-page-presentation.component";
 import { ProductPageComponent } from './product-page/product-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import {ProductService} from "./services/product.service";
 
 
 @NgModule({
@@ -19,11 +21,15 @@ import { ProductPageComponent } from './product-page/product-page.component';
     ProductItemComponent,
     ProductPageComponent
   ],
+  providers: [
+    ProductService
+  ],
   imports: [
     CommonModule,
     StoreModule.forFeature(productsPageKey, productsPageReducer),
     EffectsModule.forFeature([ProductsPageEffects]),
     ProductRoutingModule,
+    HttpClientModule,
   ]
 })
 export class ProductModule { }
