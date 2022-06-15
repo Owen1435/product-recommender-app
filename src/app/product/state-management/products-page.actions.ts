@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { Product } from 'src/app/model/product';
 import {Review} from "../../model/review";
+import {AddProductReviewRequestDto} from "../../model/dto/add-product-review.request.dto";
 
 export enum productsPageActionsType {
   GET_PRODUCTS_REQUEST = '[products-page] GET_PRODUCTS_REQUEST',
@@ -9,6 +10,7 @@ export enum productsPageActionsType {
   SET_CURRENT_PRODUCT = '[products-page] SET_CURRENT_PRODUCT',
   GET_PRODUCT_REVIEWS_REQUEST = '[products-page] GET_PRODUCT_REVIEWS_REQUEST',
   SET_PRODUCT_REVIEWS = '[products-page] SET_PRODUCT_REVIEWS',
+  ADD_PRODUCT_REVIEW_REQUEST = '[products-page] ADD_PRODUCT_REVIEW_REQUEST',
 }
 
 export class GetProductsRequestAction implements Action {
@@ -50,6 +52,14 @@ export class SetProductReviewsAction implements Action {
   }) {}
 }
 
+export class AddProductReviewRequestAction implements Action {
+  readonly type = productsPageActionsType.ADD_PRODUCT_REVIEW_REQUEST;
+  constructor(public payload: {
+    id: number,
+    addProductReviewDto: AddProductReviewRequestDto;
+  }) {}
+}
+
 export type ProductsPageActions
   = GetProductsRequestAction
   | SetProductsAction
@@ -57,3 +67,4 @@ export type ProductsPageActions
   | SetCurrentProductAction
   | GetProductReviewsRequestAction
   | SetProductReviewsAction
+  | AddProductReviewRequestAction

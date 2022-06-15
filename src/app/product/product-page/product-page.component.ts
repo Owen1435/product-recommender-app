@@ -6,12 +6,14 @@ import {select, Store} from "@ngrx/store";
 import {ProductsPageState} from "../state-management/products-page.reducer";
 import {currentProductSelector, productReviewsSelector} from "../state-management/products-page.selectors";
 import {
+  AddProductReviewRequestAction,
   GetProductByIdRequestAction,
   GetProductReviewsRequestAction,
   SetCurrentProductAction
 } from "../state-management/products-page.actions";
 import {environment} from "../../../environments/environment";
 import {Review} from "../../model/review";
+import {AddProductReviewRequestDto} from "../../model/dto/add-product-review.request.dto";
 
 @Component({
   selector: 'app-product-page',
@@ -52,5 +54,12 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.store.dispatch(new SetCurrentProductAction({product: null}))
+  }
+
+  addProductReview(addProductReviewDto: AddProductReviewRequestDto) {
+    this.store.dispatch(new AddProductReviewRequestAction({
+      id: this.id,
+      addProductReviewDto
+    }))
   }
 }

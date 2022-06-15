@@ -3,4 +3,5 @@
   <img [src]="productImg" alt="product img">
   {{product.title}}
 </div>
+<app-add-review-form (addProductReview)="addProductReview($event)"></app-add-review-form>
 <app-reviews-list [reviews]="reviews"></app-reviews-list>

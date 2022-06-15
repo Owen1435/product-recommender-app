@@ -6,6 +6,7 @@ import {catchError, map} from 'rxjs/operators';
 import { Product } from 'src/app/model/product';
 import {environment} from "../../../environments/environment";
 import {Review} from "../../model/review";
+import {AddProductReviewRequestDto} from "../../model/dto/add-product-review.request.dto";
 
 @Injectable()
 export class ProductService {
@@ -30,7 +31,7 @@ export class ProductService {
     return this.http.get<Product[]>(this.productsApiUrl)
       .pipe(
         map(products => products.find(product => product.id === id) || {} as Product),
-        catchError(this.handleError<Product>('get products', {} as Product))
+        catchError(this.handleError<Product>('get product by id', {} as Product))
       );
   }
 
@@ -38,51 +39,18 @@ export class ProductService {
     const url = `${this.reviewsApiUrl}/${id}`
     return this.http.get<Review[]>(url)
       .pipe(
-        catchError(this.handleError<Review[]>('get products', []))
+        catchError(this.handleError<Review[]>('get product reviews', []))
       );
   }
 
-  // getHero(id: number): Observable<Hero> {
-  //   const url = `${this.heroesUrl}/${id}`;
-  //   return this.http.get<Hero>(url).pipe(
-  //     tap(_ => this.log(`fetched hero id=${id}`)),
-  //     catchError(this.handleError<Hero>(`getHero id=${id}`))
-  //   );
-  // }
-  //
-  // updateHero(hero: Hero): Observable<any> {
-  //   return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
-  //     tap(_ => this.log(`updated hero id=${hero.id}`)),
-  //     catchError(this.handleError<any>('updateHero'))
-  //   );
-  // }
-  //
-  // addHero(hero: AddHeroDto): Observable<Hero> {
-  //   return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
-  //     tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
-  //     catchError(this.handleError<Hero>('addHero'))
-  //   );
-  // }
-  //
-  // deleteHero(id: number): Observable<Hero> {
-  //   const url = `${this.heroesUrl}/${id}`;
-  //   return this.http.delete<Hero>(url, this.httpOptions).pipe(
-  //     tap(_ => this.log(`deleted hero id=${id}`)),
-  //     catchError(this.handleError<Hero>('deleteHero'))
-  //   );
-  // }
-  //
-  // searchHeroes(term: string): Observable<Hero[]> {
-  //   if (!term.trim()) {
-  //     return of([]);
-  //   }
-  //   return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
-  //     tap(x => x.length ?
-  //       this.log(`found heroes matching "${term}"`) :
-  //       this.log(`no heroes matching "${term}"`)),
-  //     catchError(this.handleError<Hero[]>('searchHeroes', []))
-  //   );
-  // }
+  addProductReview(id: number, dto: AddProductReviewRequestDto): Observable<any> {
+    const url = `${this.reviewsApiUrl}/${id}`
+    return this.http.post<any>(url, dto, this.httpOptions)
+      .pipe(
+        map(resp => ({...resp, id})),
+        catchError(this.handleError<Review[]>('add product review', [])) //todo types
+      );
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

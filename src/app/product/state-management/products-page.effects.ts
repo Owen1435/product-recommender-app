@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {ProductService} from "../services/product.service";
 import {
+  AddProductReviewRequestAction,
   GetProductByIdRequestAction, GetProductReviewsRequestAction,
   GetProductsRequestAction,
   productsPageActionsType,
@@ -50,6 +51,17 @@ export class ProductsPageEffects {
         return new SetProductReviewsAction({
           reviews
         })
+      }),
+      catchError(() => of({ type: 'something was wrong' }))
+    )),
+  ))
+
+  addProductReview$ = createEffect(() => this.actions$.pipe(
+    ofType<AddProductReviewRequestAction>(productsPageActionsType.ADD_PRODUCT_REVIEW_REQUEST),
+    map(action => action.payload),
+    mergeMap((payload) => this.productService.addProductReview(payload.id, payload.addProductReviewDto).pipe(
+      map((resp) => {
+        return new GetProductReviewsRequestAction(resp.id)
       }),
       catchError(() => of({ type: 'something was wrong' }))
     )),

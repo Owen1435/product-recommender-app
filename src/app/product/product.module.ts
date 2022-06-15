@@ -13,6 +13,13 @@ import { ProductPageComponent } from './product-page/product-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import {ProductService} from "./services/product.service";
 import { ReviewsListComponent } from './components/reviews-list/reviews-list.component';
+import { AddReviewFormComponent } from './components/add-review-form/add-review-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatInputModule} from "@angular/material/input";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import { ReviewItemComponent } from './components/review-item/review-item.component';
 
 
 @NgModule({
@@ -21,7 +28,9 @@ import { ReviewsListComponent } from './components/reviews-list/reviews-list.com
     ProductPagePresentationComponent,
     ProductItemComponent,
     ProductPageComponent,
-    ReviewsListComponent
+    ReviewsListComponent,
+    AddReviewFormComponent,
+    ReviewItemComponent
   ],
   providers: [
     ProductService
@@ -32,6 +41,11 @@ import { ReviewsListComponent } from './components/reviews-list/reviews-list.com
     EffectsModule.forFeature([ProductsPageEffects]),
     ProductRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
   ]
 })
 export class ProductModule { }

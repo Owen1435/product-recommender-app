@@ -1,4 +1,2 @@
 <p>reviews-list works!</p>
-<div *ngFor="let review of reviews">
-  {{review.id}}
-</div>
+<app-review-item *ngFor="let review of reviews" [review]="review"></app-review-item>
