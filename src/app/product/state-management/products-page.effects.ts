@@ -1,22 +1,44 @@
 import { Injectable } from '@angular/core';
-import { Actions } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { of } from 'rxjs';
+import {catchError, map, mergeMap} from 'rxjs/operators';
+import {ProductService} from "../services/product.service";
+import {
+  GetProductByIdRequestAction,
+  GetProductsRequestAction,
+  productsPageActionsType,
+  SetCurrentProductAction, SetProductsAction
+} from "./products-page.actions";
 
 @Injectable()
 export class ProductsPageEffects {
   constructor(
     private actions$: Actions,
-    // private heroService: HeroService
+    private productService: ProductService
   ) {}
 
-  // getHeroes$ = createEffect(() => this.actions$.pipe(
-  //   ofType<GetHeroesRequestAction>(heroesActionsType.GET_HEROES_REQUEST),
-  //   mergeMap(() => this.heroService.getHeroes().pipe(
-  //     map((value) => {
-  //       return new SetHeroesAction({
-  //         heroes: value
-  //       })
-  //     }),
-  //     catchError(() => of({ type: 'something was wrong' }))
-  //   )),
-  // ))
+  getProducts$ = createEffect(() => this.actions$.pipe(
+    ofType<GetProductsRequestAction>(productsPageActionsType.GET_PRODUCTS_REQUEST),
+    mergeMap(() => this.productService.getProducts().pipe(
+      map((products) => {
+        return new SetProductsAction({
+          products
+        })
+      }),
+      catchError(() => of({ type: 'something was wrong' }))
+    )),
+  ))
+
+  getProductById$ = createEffect(() => this.actions$.pipe(
+    ofType<GetProductByIdRequestAction>(productsPageActionsType.GET_PRODUCT_BY_ID_REQUEST),
+    map(action => action.payload),
+    mergeMap((payload) => this.productService.getProduct(payload.id).pipe(
+      map((product) => {
+        return new SetCurrentProductAction({
+          product
+        })
+      }),
+      catchError(() => of({ type: 'something was wrong' }))
+    )),
+  ))
 }

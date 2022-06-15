@@ -5,7 +5,7 @@ export enum productsPageActionsType {
   GET_PRODUCTS_REQUEST = '[products-page] GET_PRODUCTS_REQUEST',
   SET_PRODUCTS = '[products-page] SET_PRODUCTS',
   GET_PRODUCT_BY_ID_REQUEST = '[products-page] GET_PRODUCT_BY_ID_REQUEST',
-  SET_SELECTED_PRODUCT = '[products-page] SET_SELECTED_PRODUCT',
+  SET_CURRENT_PRODUCT = '[products-page] SET_CURRENT_PRODUCT',
 }
 
 export class GetProductsRequestAction implements Action {
@@ -19,6 +19,22 @@ export class SetProductsAction implements Action {
   }) {}
 }
 
+export class GetProductByIdRequestAction implements Action {
+  readonly type = productsPageActionsType.GET_PRODUCT_BY_ID_REQUEST;
+  constructor(public payload: {
+    id: number;
+  }) {}
+}
+
+export class SetCurrentProductAction implements Action {
+  readonly type = productsPageActionsType.SET_CURRENT_PRODUCT;
+  constructor(public payload: {
+    product: Product | null;
+  }) {}
+}
+
 export type ProductsPageActions
   = GetProductsRequestAction
   | SetProductsAction
+  | GetProductByIdRequestAction
+  | SetCurrentProductAction

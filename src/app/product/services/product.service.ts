@@ -4,10 +4,11 @@ import { of } from 'rxjs/internal/observable/of';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {catchError, map} from 'rxjs/operators';
 import { Product } from 'src/app/model/product';
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class ProductService {
-  public apiUrl = 'http://smktesting.herokuapp.com/api/products/';
+  public apiUrl = environment.apiUrl + '/products/';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

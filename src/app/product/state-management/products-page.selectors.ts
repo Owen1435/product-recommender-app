@@ -7,3 +7,8 @@ export const productsSelector = createSelector(
   featureSelector,
   (state) => state.products
 );
+
+export const currentProductSelector = createSelector(
+  featureSelector,
+  (state) => state.currentProduct
+);
