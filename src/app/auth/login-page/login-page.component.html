@@ -1,0 +1,32 @@
+<div class="root">
+  <form class="login-form" [formGroup]="form">
+    <h2 class="form-title">Auth</h2>
+
+    <mat-form-field class="field" appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hide = !hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button mat-stroked-button class="button register"
+            color="primary"
+            (click)="register()"
+            [disabled]="form.invalid">
+      register
+    </button>
+
+    <button mat-raised-button class="button login"
+            color="primary"
+            (click)="login()"
+            [disabled]="form.invalid">
+      login
+    </button>
+  </form>
+</div>

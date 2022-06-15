@@ -2,4 +2,26 @@
   background-color: #3d5dff;
   color: white;
   height: 50px;
+  display: flex;
+  align-items: center;
+
+  nav {
+    display: flex;
+    flex: 1;
+
+    a {
+      color: white;
+      display: block;
+      text-decoration: none;
+      margin: 10px ;
+    }
+
+    a.active {
+      border-bottom: 2px solid white;
+    }
+
+    :last-child {
+      margin-left: auto;
+    }
+  }
 }
