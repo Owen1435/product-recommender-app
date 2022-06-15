@@ -12,6 +12,7 @@ import {ProductPagePresentationComponent} from "./products-page/product-page-pre
 import { ProductPageComponent } from './product-page/product-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import {ProductService} from "./services/product.service";
+import { ReviewsListComponent } from './components/reviews-list/reviews-list.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {ProductService} from "./services/product.service";
     ProductPageSmartComponent,
     ProductPagePresentationComponent,
     ProductItemComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    ReviewsListComponent
   ],
   providers: [
     ProductService

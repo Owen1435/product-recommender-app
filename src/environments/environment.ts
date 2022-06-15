@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://smktesting.herokuapp.com/api',
-  staticUrl: 'http://smktesting.herokuapp.com/api'
+  staticUrl: 'http://smktesting.herokuapp.com/static/'
 };
 
 /*

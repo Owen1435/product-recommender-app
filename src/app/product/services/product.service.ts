@@ -5,10 +5,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {catchError, map} from 'rxjs/operators';
 import { Product } from 'src/app/model/product';
 import {environment} from "../../../environments/environment";
+import {Review} from "../../model/review";
 
 @Injectable()
 export class ProductService {
-  public apiUrl = environment.apiUrl + '/products/';
+  public productsApiUrl = environment.apiUrl + '/products';
+  public reviewsApiUrl = environment.apiUrl + '/reviews';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -18,17 +20,25 @@ export class ProductService {
   ) { }
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl)
+    return this.http.get<Product[]>(this.productsApiUrl)
       .pipe(
         catchError(this.handleError<Product[]>('get products', []))
       );
   }
 
   getProduct(id: number): Observable<Product> {
-    return this.http.get<Product[]>(this.apiUrl)
+    return this.http.get<Product[]>(this.productsApiUrl)
       .pipe(
         map(products => products.find(product => product.id === id) || {} as Product),
         catchError(this.handleError<Product>('get products', {} as Product))
+      );
+  }
+
+  getProductReviews(id: number): Observable<Review[]> {
+    const url = `${this.reviewsApiUrl}/${id}`
+    return this.http.get<Review[]>(url)
+      .pipe(
+        catchError(this.handleError<Review[]>('get products', []))
       );
   }
 

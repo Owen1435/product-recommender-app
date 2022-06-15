@@ -1,5 +1,6 @@
 <p>product-page works!</p>
 <div *ngIf="product">
-  <img [src]="product.img" alt="product img">
+  <img [src]="productImg" alt="product img">
   {{product.title}}
 </div>
+<app-reviews-list [reviews]="reviews"></app-reviews-list>

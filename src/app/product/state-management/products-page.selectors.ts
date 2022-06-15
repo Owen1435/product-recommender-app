@@ -12,3 +12,9 @@ export const currentProductSelector = createSelector(
   featureSelector,
   (state) => state.currentProduct
 );
+
+export const productReviewsSelector = createSelector(
+  featureSelector,
+  (state) => state.productReviews
+);
+

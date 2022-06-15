@@ -4,10 +4,10 @@ import { of } from 'rxjs';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {ProductService} from "../services/product.service";
 import {
-  GetProductByIdRequestAction,
+  GetProductByIdRequestAction, GetProductReviewsRequestAction,
   GetProductsRequestAction,
   productsPageActionsType,
-  SetCurrentProductAction, SetProductsAction
+  SetCurrentProductAction, SetProductReviewsAction, SetProductsAction
 } from "./products-page.actions";
 
 @Injectable()
@@ -36,6 +36,19 @@ export class ProductsPageEffects {
       map((product) => {
         return new SetCurrentProductAction({
           product
+        })
+      }),
+      catchError(() => of({ type: 'something was wrong' }))
+    )),
+  ))
+
+  getProductReviews$ = createEffect(() => this.actions$.pipe(
+    ofType<GetProductReviewsRequestAction>(productsPageActionsType.GET_PRODUCT_REVIEWS_REQUEST),
+    map(action => action.payload),
+    mergeMap((payload) => this.productService.getProductReviews(payload.id).pipe(
+      map((reviews) => {
+        return new SetProductReviewsAction({
+          reviews
         })
       }),
       catchError(() => of({ type: 'something was wrong' }))
