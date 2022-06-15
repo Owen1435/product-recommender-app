@@ -9,13 +9,15 @@ import {productsPageKey, productsPageReducer} from "./state-management/products-
 import {ProductsPageEffects} from "./state-management/products-page.effects";
 import {ProductPageSmartComponent} from "./products-page/product-page-smart.component";
 import {ProductPagePresentationComponent} from "./products-page/product-page-presentation.component";
+import { ProductPageComponent } from './product-page/product-page.component';
 
 
 @NgModule({
   declarations: [
     ProductPageSmartComponent,
     ProductPagePresentationComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    ProductPageComponent
   ],
   imports: [
     CommonModule,

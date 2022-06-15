@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {Product} from "../../../model/product";
 
 @Component({
@@ -15,5 +16,4 @@ export class ProductItemComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
