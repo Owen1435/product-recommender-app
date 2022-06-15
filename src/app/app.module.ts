@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {ProductModule} from "./product/product.module";
+import {AuthModule} from "./auth/auth.module";
+import {CommonAppModule} from "./common-app/common-app.module";
 
 @NgModule({
   declarations: [
@@ -10,6 +13,9 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
+    ProductModule,
+    AuthModule,
+    CommonAppModule,
     AppRoutingModule
   ],
   providers: [],
