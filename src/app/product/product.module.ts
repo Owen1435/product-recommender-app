@@ -23,6 +23,7 @@ import { ReviewItemComponent } from './components/review-item/review-item.compon
 import { ProductPageSmartComponent } from './product-page/product-page-smart.component';
 import { ProductPagePresentationComponent } from './product-page/product-page-presentation.component';
 import {ProductsPageSmartComponent} from "./products-page/products-page-smart.component";
+import {CommonAppModule} from "../common-app/common-app.module";
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import {ProductsPageSmartComponent} from "./products-page/products-page-smart.co
   ],
   imports: [
     CommonModule,
+    CommonAppModule,
     StoreModule.forFeature(productsPageKey, productsPageReducer),
     EffectsModule.forFeature([ProductsPageEffects]),
     ProductRoutingModule,

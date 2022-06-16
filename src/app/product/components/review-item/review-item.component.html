@@ -6,7 +6,9 @@
     <div class="username">{{review.created_by.username}}</div>
   </div>
   <div class="content">
-    <div class="rate">{{review.rate}}</div>
+    <div class="rate">Rate: {{review.rate}}
+      <app-rate [rate]="review.rate"></app-rate>
+    </div>
     <div class="text">{{review.text}}</div>
     <div class="date">{{review.created_at | date:'short'}}</div>
   </div>

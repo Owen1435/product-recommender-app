@@ -1,0 +1,6 @@
+<div class="rate-block">
+  <span *ngFor="let i of [1, 2, 3, 4, 5]">
+    <mat-icon *ngIf="i <= rate">star</mat-icon>
+    <mat-icon *ngIf="i > rate">star_outline</mat-icon>
+  </span>
+</div>

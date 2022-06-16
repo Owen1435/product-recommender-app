@@ -16,7 +16,7 @@ export class AuthService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  isAuth: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  public isAuth: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
 
   constructor(
     private http: HttpClient,

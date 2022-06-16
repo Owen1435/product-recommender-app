@@ -4,11 +4,13 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HeaderComponent } from './header/header.component';
 import {RouterModule} from "@angular/router";
 import {MatIconModule} from "@angular/material/icon";
+import { RateComponent } from './rate/rate.component';
 
 @NgModule({
   declarations: [
     NotFoundComponent,
-    HeaderComponent
+    HeaderComponent,
+    RateComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatIconModule,
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    RateComponent
   ]
 })
 export class CommonAppModule { }
