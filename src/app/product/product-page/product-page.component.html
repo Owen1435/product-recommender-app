@@ -1,11 +1,11 @@
 <div class="root" *ngIf="product">
   <div class="product">
+    <h2 class="title">{{product.title}}</h2>
     <img [src]="productImg" alt="product img">
-    <div class="title">{{product.title}}</div>
   </div>
   <div class="description">
     <h2>Description</h2>
-    {{product.title}}
+    {{product.text}}
   </div>
 </div>
 

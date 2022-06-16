@@ -3,13 +3,13 @@
   border-bottom: 1px solid black;
 
   .product {
-    width: 250px;
-    height: 250px;
+    padding: 10px;
     border-right: 1px solid black;
 
     .title {
       text-decoration: none;
-      padding: 10px;
+      text-align: center;
+      margin-bottom: 5px;
     }
   }
 

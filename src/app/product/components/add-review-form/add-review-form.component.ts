@@ -15,8 +15,12 @@ export class AddReviewFormComponent {
 
   constructor() {
     this.form = new FormGroup({
-      "rate": new FormControl('', [Validators.required]),
       "text": new FormControl('', [Validators.required]),
+      "rate": new FormControl('', [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(5)
+      ]),
     });
   }
 
