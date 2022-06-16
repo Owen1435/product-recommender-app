@@ -1,13 +1,17 @@
 <div class="root" *ngIf="product">
-  <div class="product">
-    <h2 class="title">{{product.title}}</h2>
-    <img [src]="productImg" alt="product img">
+  <div class="product-block">
+    <div class="product">
+      <h2 class="title">{{product.title}}</h2>
+      <img [src]="productImg" alt="product img">
+    </div>
+    <div class="description">
+      <h2>Description</h2>
+      {{product.text}}
+    </div>
   </div>
-  <div class="description">
-    <h2>Description</h2>
-    {{product.text}}
-  </div>
+
+  <app-add-review-form (formSubmit)="addProductReview.emit($event)"></app-add-review-form>
+  <app-reviews-list [reviews]="reviews"></app-reviews-list>
 </div>
 
-<app-add-review-form (formSubmit)="addProductReview.emit($event)"></app-add-review-form>
-<app-reviews-list [reviews]="reviews"></app-reviews-list>
+<app-not-found *ngIf="!product"></app-not-found>

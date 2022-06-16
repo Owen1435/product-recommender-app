@@ -27,10 +27,10 @@ export class ProductService {
       );
   }
 
-  getProduct(id: number): Observable<Product> {
+  getProduct(id: number): Observable<Product | null> {
     return this.http.get<Product[]>(this.productsApiUrl)
       .pipe(
-        map(products => products.find(product => product.id === id) || {} as Product),
+        map(products => products.find(product => product.id === id) || null),
         catchError(this.handleError<Product>('get product by id', {} as Product))
       );
   }

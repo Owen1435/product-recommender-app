@@ -21,7 +21,8 @@ import {MatButtonModule} from "@angular/material/button";
   ],
   exports: [
     HeaderComponent,
-    RateComponent
+    RateComponent,
+    NotFoundComponent
   ]
 })
 export class CommonAppModule { }
