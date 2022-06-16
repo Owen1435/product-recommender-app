@@ -1,9 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {select, Store} from "@ngrx/store";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {first, Observable} from 'rxjs';
+
 import {ProductService} from "../services/product.service";
 import {Product} from "../../model/product";
-import {select, Store} from "@ngrx/store";
 import {ProductsPageState} from "../state-management/products-page.reducer";
+import {Review} from "../../model/review";
+import {AddProductReviewRequestDto} from "../../model/dto/add-product-review.request.dto";
+import {AuthService} from "../../auth/services/auth.service";
 import {currentProductSelector, productReviewsSelector} from "../state-management/products-page.selectors";
 import {
   AddProductReviewRequestAction,
@@ -11,9 +17,6 @@ import {
   GetProductReviewsRequestAction,
   SetCurrentProductAction
 } from "../state-management/products-page.actions";
-import {Review} from "../../model/review";
-import {AddProductReviewRequestDto} from "../../model/dto/add-product-review.request.dto";
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-page',
@@ -33,7 +36,9 @@ export class ProductPageSmartComponent implements OnInit, OnDestroy {
 
   constructor(
     private productService: ProductService,
+    private authService: AuthService,
     private store: Store<ProductsPageState>,
+    private snackBar: MatSnackBar,
     route: ActivatedRoute,
   ) {
     this.productId = Number(route.snapshot.paramMap.get('id'))
@@ -53,9 +58,23 @@ export class ProductPageSmartComponent implements OnInit, OnDestroy {
   }
 
   addProductReview(addProductReviewDto: AddProductReviewRequestDto) {
-    this.store.dispatch(new AddProductReviewRequestAction({
+    const payload = {
       id: this.productId,
       addProductReviewDto
-    }))
+    }
+
+    this.authService.isAuth.pipe(first()).subscribe(isAuth => {
+      isAuth
+        ? this.store.dispatch(new AddProductReviewRequestAction(payload))
+        : this.openSnackBar('You are not auth')
+    })
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'close', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: 2000,
+    });
   }
 }
