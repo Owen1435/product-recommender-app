@@ -47,8 +47,7 @@ export class ProductService {
     const url = `${this.reviewsApiUrl}/${id}`
     return this.http.post<any>(url, dto, this.httpOptions)
       .pipe(
-        map(resp => ({...resp, id})),
-        catchError(this.handleError<Review[]>('add product review', [])) //todo types
+        map(resp => ({...resp, productId: id}))
       );
   }
 

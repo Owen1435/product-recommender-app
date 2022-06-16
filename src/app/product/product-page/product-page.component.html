@@ -1,7 +1,12 @@
-<p>product-page works!</p>
-<div *ngIf="product">
-  <img [src]="productImg" alt="product img">
-  {{product.title}}
+<div class="root" *ngIf="product">
+  <div class="product">
+    <img [src]="productImg" alt="product img">
+    <div class="title">{{product.title}}</div>
+  </div>
+  <div class="description">
+    {{product.title}}
+  </div>
 </div>
+
 <app-add-review-form (addProductReview)="addProductReview($event)"></app-add-review-form>
 <app-reviews-list [reviews]="reviews"></app-reviews-list>

@@ -1,3 +1,13 @@
 <div class="item" *ngIf="review">
-  {{review.id}} {{review.rate}}
+  <div class="user">
+    <div class="avatar">
+      <mat-icon>person</mat-icon>
+    </div>
+    <div class="username">{{review.created_by.username}}</div>
+  </div>
+  <div class="content">
+    <div class="rate">{{review.rate}}</div>
+    <div class="text">{{review.text}}</div>
+    <div class="date">{{review.created_at | date:'short'}}</div>
+  </div>
 </div>

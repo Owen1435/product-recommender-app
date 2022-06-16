@@ -6,4 +6,5 @@ export interface Review {
   rate: number,
   text: string
   created_by: User,
+  created_at: string,
 }

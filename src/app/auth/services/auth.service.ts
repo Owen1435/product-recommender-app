@@ -20,27 +20,27 @@ export class AuthService {
     private http: HttpClient,
   ) { }
 
-  public register(dto: RegisterRequestDto): Observable<RegisterResponseDto> {
+  register(dto: RegisterRequestDto): Observable<RegisterResponseDto> {
     return this.http.post<RegisterResponseDto>(this.registerApiUrl, dto, this.httpOptions)
       .pipe(
         tap(resp => this.setToken(resp)),
-        catchError(this.handleError<RegisterResponseDto>('register'))
+        catchError(this.handleError<RegisterResponseDto>('register error'))
       );
   }
 
-  public login(dto: RegisterRequestDto): Observable<RegisterResponseDto> {
+  login(dto: RegisterRequestDto): Observable<RegisterResponseDto> {
     return this.http.post<RegisterResponseDto>(this.loginApiUrl, dto, this.httpOptions)
       .pipe(
         tap(resp => this.setToken(resp)),
-        catchError(this.handleError<RegisterResponseDto>('login'))
+        catchError(this.handleError<RegisterResponseDto>('login error'))
       );
   }
 
-  public logout(): void {
+  logout(): void {
     localStorage.removeItem('token')
   }
 
-  public isAuth(): boolean {
+  isAuth(): boolean {
     const token = localStorage.getItem('token')
     return !!token
   }

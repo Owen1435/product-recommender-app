@@ -61,9 +61,12 @@ export class ProductsPageEffects {
     map(action => action.payload),
     mergeMap((payload) => this.productService.addProductReview(payload.id, payload.addProductReviewDto).pipe(
       map((resp) => {
-        return new GetProductReviewsRequestAction(resp.id)
+        return new GetProductReviewsRequestAction({id: resp.productId})
       }),
-      catchError(() => of({ type: 'something was wrong' }))
+      catchError((resp) => {
+        console.log('error', resp.status)
+        return of({ type: 'something was wrong' })
+      })
     )),
   ))
 }

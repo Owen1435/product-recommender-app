@@ -20,6 +20,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import { ReviewItemComponent } from './components/review-item/review-item.component';
+import {MatCardModule} from "@angular/material/card";
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ReviewItemComponent } from './components/review-item/review-item.compon
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatCardModule,
   ]
 })
 export class ProductModule { }

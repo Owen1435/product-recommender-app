@@ -1,16 +1,24 @@
 .item {
-  border: 1px solid black;
-  width: 200px;
-  height: 200px;
+  margin: 10px;
+  width: 250px;
+  height: 250px;
 
-  margin: 5px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
 
-  &:hover {
-    background-color: red;
+  .title {
+    text-decoration: none;
+    padding: 10px;
   }
 
   img {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: calc(100% - 50px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.03);
   }
 }
