@@ -15,7 +15,7 @@ import {GetProductsRequestAction} from "../state-management/products-page.action
     </app-products-page-presentation>
   `,
 })
-export class ProductPageSmartComponent implements OnInit {
+export class ProductsPageSmartComponent implements OnInit {
 
   products$: Observable<Product[]>
 

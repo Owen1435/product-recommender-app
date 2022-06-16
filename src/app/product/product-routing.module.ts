@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ProductPageSmartComponent} from "./products-page/product-page-smart.component";
-import {ProductPageComponent} from "./product-page/product-page.component";
+import { ProductPageSmartComponent } from './product-page/product-page-smart.component';
+import { ProductsPageSmartComponent } from './products-page/products-page-smart.component';
 
 const routes: Routes = [
-  {path: 'products', component: ProductPageSmartComponent},
-  {path: 'product/:id', component: ProductPageComponent}
+  {path: 'products', component: ProductsPageSmartComponent},
+  {path: 'product/:id', component: ProductPageSmartComponent}
 ];
 
 @NgModule({

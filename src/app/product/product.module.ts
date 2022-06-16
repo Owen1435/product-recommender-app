@@ -7,9 +7,7 @@ import { ProductRoutingModule } from './product-routing.module';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import {productsPageKey, productsPageReducer} from "./state-management/products-page.reducer";
 import {ProductsPageEffects} from "./state-management/products-page.effects";
-import {ProductPageSmartComponent} from "./products-page/product-page-smart.component";
-import {ProductPagePresentationComponent} from "./products-page/product-page-presentation.component";
-import { ProductPageComponent } from './product-page/product-page.component';
+import {ProductsPagePresentationComponent} from "./products-page/products-page-presentation.component";
 import { HttpClientModule } from '@angular/common/http';
 import {ProductService} from "./services/product.service";
 import { ReviewsListComponent } from './components/reviews-list/reviews-list.component';
@@ -21,14 +19,18 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import { ReviewItemComponent } from './components/review-item/review-item.component';
 import {MatCardModule} from "@angular/material/card";
+import { ProductPageSmartComponent } from './product-page/product-page-smart.component';
+import { ProductPagePresentationComponent } from './product-page/product-page-presentation.component';
+import {ProductsPageSmartComponent} from "./products-page/products-page-smart.component";
 
 
 @NgModule({
   declarations: [
+    ProductsPageSmartComponent,
+    ProductsPagePresentationComponent,
     ProductPageSmartComponent,
     ProductPagePresentationComponent,
     ProductItemComponent,
-    ProductPageComponent,
     ReviewsListComponent,
     AddReviewFormComponent,
     ReviewItemComponent

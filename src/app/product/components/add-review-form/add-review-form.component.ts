@@ -9,7 +9,7 @@ import {AddProductReviewRequestDto} from "../../../model/dto/add-product-review.
 })
 export class AddReviewFormComponent {
   @Output()
-  addProductReview: EventEmitter<AddProductReviewRequestDto> = new EventEmitter<AddProductReviewRequestDto>();
+  formSubmit: EventEmitter<AddProductReviewRequestDto> = new EventEmitter<AddProductReviewRequestDto>();
 
   public form : FormGroup = new FormGroup({});
 
@@ -26,7 +26,7 @@ export class AddReviewFormComponent {
       text: this.form.get('text')?.value
     }
     console.log(addProductReviewDto)
-    this.addProductReview.emit(addProductReviewDto)
+    this.formSubmit.emit(addProductReviewDto)
     this.form.reset()
   }
 }

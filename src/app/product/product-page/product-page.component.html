@@ -8,5 +8,5 @@
   </div>
 </div>
 
-<app-add-review-form (addProductReview)="addProductReview($event)"></app-add-review-form>
+<app-add-review-form (formSubmit)="addProductReview.emit($event)"></app-add-review-form>
 <app-reviews-list [reviews]="reviews"></app-reviews-list>

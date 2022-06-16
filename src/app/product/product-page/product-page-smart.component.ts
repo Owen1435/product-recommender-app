@@ -11,44 +11,40 @@ import {
   GetProductReviewsRequestAction,
   SetCurrentProductAction
 } from "../state-management/products-page.actions";
-import {environment} from "../../../environments/environment";
 import {Review} from "../../model/review";
 import {AddProductReviewRequestDto} from "../../model/dto/add-product-review.request.dto";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-page',
-  templateUrl: './product-page.component.html',
-  styleUrls: ['./product-page.component.scss']
+  template: `
+    <app-product-page-presentation
+      [product]="(product$ | async)!"
+      [reviews]="(reviews$ | async)!"
+      (addProductReview)="addProductReview($event)"
+    >
+    </app-product-page-presentation>
+  `
 })
-export class ProductPageComponent implements OnInit, OnDestroy {
-
-  id: number
-  product: Product | null | undefined
-  reviews: Review[] = []
-  // product$: Observable<Product | null>
-
-  get productImg(): string {
-    return environment.staticUrl + this.product?.img
-  }
+export class ProductPageSmartComponent implements OnInit, OnDestroy {
+  productId: number
+  product$: Observable<Product | null>
+  reviews$: Observable<Review[]>
 
   constructor(
     private productService: ProductService,
     private store: Store<ProductsPageState>,
     route: ActivatedRoute,
   ) {
-    this.id = Number(route.snapshot.paramMap.get('id'))
-    this.store.pipe(select(currentProductSelector)).subscribe(product =>
-      this.product = product
-    )
-    this.store.pipe(select(productReviewsSelector)).subscribe(reviews =>
-      this.reviews = reviews
-    )
+    this.productId = Number(route.snapshot.paramMap.get('id'))
+    this.product$ = this.store.pipe(select(currentProductSelector))
+    this.reviews$ = this.store.pipe(select(productReviewsSelector))
   }
 
   ngOnInit(): void {
-    if (this.id) {
-      this.store.dispatch(new GetProductByIdRequestAction({id: this.id}))
-      this.store.dispatch(new GetProductReviewsRequestAction({id: this.id}))
+    if (this.productId) {
+      this.store.dispatch(new GetProductByIdRequestAction({id: this.productId}))
+      this.store.dispatch(new GetProductReviewsRequestAction({id: this.productId}))
     }
   }
 
@@ -58,7 +54,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
   addProductReview(addProductReviewDto: AddProductReviewRequestDto) {
     this.store.dispatch(new AddProductReviewRequestAction({
-      id: this.id,
+      id: this.productId,
       addProductReviewDto
     }))
   }

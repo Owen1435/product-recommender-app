@@ -3,10 +3,10 @@ import {Product} from "../../model/product";
 
 @Component({
   selector: 'app-products-page-presentation',
-  templateUrl: './product-page.component.html',
+  templateUrl: './products-page.component.html',
   styleUrls: ['./product-page.component.scss']
 })
-export class ProductPagePresentationComponent implements OnInit {
+export class ProductsPagePresentationComponent implements OnInit {
 
   @Input()
   products: Product[] | undefined
