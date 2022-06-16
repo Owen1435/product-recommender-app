@@ -47,7 +47,7 @@ export class ProductService {
     const url = `${this.reviewsApiUrl}/${id}`
     return this.http.post<any>(url, dto, this.httpOptions)
       .pipe(
-        map(resp => ({...resp, productId: id}))
+        map(resp => ({...resp, productId: id})) //todo ?
       );
   }
 

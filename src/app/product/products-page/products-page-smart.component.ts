@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Product} from "../../model/product";
 import {Observable} from "rxjs";
 import {select, Store } from '@ngrx/store';
+
+import {Product} from "../../model/product";
 import {ProductsPageState} from "../state-management/products-page.reducer";
 import {productsSelector} from "../state-management/products-page.selectors";
 import {GetProductsRequestAction} from "../state-management/products-page.actions";
