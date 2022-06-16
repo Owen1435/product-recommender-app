@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { of } from 'rxjs/internal/observable/of';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {catchError} from 'rxjs/operators';
+import { Observable } from 'rxjs/internal/Observable';
+import {BehaviorSubject, tap} from "rxjs";
+
 import {environment} from "../../../environments/environment";
 import {RegisterRequestDto} from "../../model/dto/register.request.dto";
 import {RegisterResponseDto} from "../../model/dto/register.response.dto";
-import {BehaviorSubject, tap} from "rxjs";
 
 @Injectable()
 export class AuthService {
-  public loginApiUrl = environment.apiUrl + '/login/';
-  public registerApiUrl = environment.apiUrl + '/register/';
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -25,18 +22,18 @@ export class AuthService {
   }
 
   register(dto: RegisterRequestDto): Observable<RegisterResponseDto> {
-    return this.http.post<RegisterResponseDto>(this.registerApiUrl, dto, this.httpOptions)
+    const url = environment.apiUrl + '/register/'
+    return this.http.post<RegisterResponseDto>(url, dto, this.httpOptions)
       .pipe(
-        tap(resp => this.setToken(resp)),
-        catchError(this.handleError<RegisterResponseDto>('register error'))
+        tap(resp => this.setToken(resp))
       );
   }
 
   login(dto: RegisterRequestDto): Observable<RegisterResponseDto> {
-    return this.http.post<RegisterResponseDto>(this.loginApiUrl, dto, this.httpOptions)
+    const url = environment.apiUrl + '/login/'
+    return this.http.post<RegisterResponseDto>(url, dto, this.httpOptions)
       .pipe(
-        tap(resp => this.setToken(resp)),
-        catchError(this.handleError<RegisterResponseDto>('login error'))
+        tap(resp => this.setToken(resp))
       );
   }
 
@@ -50,13 +47,6 @@ export class AuthService {
       localStorage.setItem('token', resp.token)
       this.isAuth.next(true)
     }
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(operation, error);
-      return of(result as T);
-    };
   }
 }
 
