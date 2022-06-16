@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {select, Store} from "@ngrx/store";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -27,7 +27,8 @@ import {
       (addProductReview)="addProductReview($event)"
     >
     </app-product-page-presentation>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductPageSmartComponent implements OnInit, OnDestroy {
   productId: number

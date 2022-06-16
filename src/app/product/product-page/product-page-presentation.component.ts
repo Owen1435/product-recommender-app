@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Product} from "../../model/product";
 import {environment} from "../../../environments/environment";
 import {Review} from "../../model/review";
@@ -7,7 +7,8 @@ import {AddProductReviewRequestDto} from "../../model/dto/add-product-review.req
 @Component({
   selector: 'app-product-page-presentation',
   templateUrl: './product-page.component.html',
-  styleUrls: ['./product-page.component.scss']
+  styleUrls: ['./product-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductPagePresentationComponent implements OnInit {
 

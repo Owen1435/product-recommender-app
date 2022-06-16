@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {select, Store } from '@ngrx/store';
 
@@ -15,6 +15,7 @@ import {GetProductsRequestAction} from "../state-management/products-page.action
     >
     </app-products-page-presentation>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsPageSmartComponent implements OnInit {
 

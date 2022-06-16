@@ -1,11 +1,12 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators } from '@angular/forms';
 import {AddProductReviewRequestDto} from "../../../model/dto/add-product-review.request.dto";
 
 @Component({
   selector: 'app-add-review-form',
   templateUrl: './add-review-form.component.html',
-  styleUrls: ['./add-review-form.component.scss']
+  styleUrls: ['./add-review-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddReviewFormComponent {
   @Output()
