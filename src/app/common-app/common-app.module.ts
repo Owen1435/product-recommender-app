@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import {RouterModule} from "@angular/router";
 import {MatIconModule} from "@angular/material/icon";
 import { RateComponent } from './rate/rate.component';
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { RateComponent } from './rate/rate.component';
     CommonModule,
     RouterModule,
     MatIconModule,
+    MatButtonModule,
   ],
   exports: [
     HeaderComponent,
