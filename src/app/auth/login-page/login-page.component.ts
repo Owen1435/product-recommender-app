@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {RegisterRequestDto} from "../../model/dto/register.request.dto";
+import {Router} from "@angular/router";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login-page',
@@ -10,15 +12,25 @@ import {RegisterRequestDto} from "../../model/dto/register.request.dto";
 })
 export class LoginPageComponent implements OnInit {
 
-  hide = true;
   public form : FormGroup = new FormGroup({});
+  public hidePass = true;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.form = new FormGroup({
       "username": new FormControl('', [Validators.required]),
       "password": new FormControl('', [Validators.required]),
+    });
+  }
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'close', {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: 2000,
     });
   }
 
@@ -30,7 +42,10 @@ export class LoginPageComponent implements OnInit {
       username: this.form.get('username')?.value,
       password: this.form.get('password')?.value,
     }
-    this.authService.register(dto).subscribe(resp => console.log(resp))
+    this.authService.register(dto).subscribe(resp => {
+      resp.success ? this.router.navigate(['/']) : this.openSnackBar(resp.message || 'error')
+      this.form.reset()
+    })
   }
 
   login() {
@@ -38,6 +53,9 @@ export class LoginPageComponent implements OnInit {
       username: this.form.get('username')?.value,
       password: this.form.get('password')?.value,
     }
-    this.authService.login(dto).subscribe(resp => console.log(resp))
+    this.authService.login(dto).subscribe(resp => {
+      resp.success ? this.router.navigate(['/']) : this.openSnackBar(resp.message || 'error')
+      this.form.reset()
+    })
   }
 }

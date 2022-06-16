@@ -11,6 +11,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthService} from "./services/auth.service";
 import { AuthInterceptor } from './auth.interceptor';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AuthInterceptor } from './auth.interceptor';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatSnackBarModule
   ]
 })
 export class AuthModule { }
