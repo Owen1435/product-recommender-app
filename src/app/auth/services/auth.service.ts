@@ -6,7 +6,7 @@ import {catchError} from 'rxjs/operators';
 import {environment} from "../../../environments/environment";
 import {RegisterRequestDto} from "../../model/dto/register.request.dto";
 import {RegisterResponseDto} from "../../model/dto/register.response.dto";
-import {tap} from "rxjs";
+import {BehaviorSubject, tap} from "rxjs";
 
 @Injectable()
 export class AuthService {
@@ -16,9 +16,13 @@ export class AuthService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  isAuth: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+
   constructor(
     private http: HttpClient,
-  ) { }
+  ) {
+    this.isAuth.next(!!localStorage.getItem('token'))
+  }
 
   register(dto: RegisterRequestDto): Observable<RegisterResponseDto> {
     return this.http.post<RegisterResponseDto>(this.registerApiUrl, dto, this.httpOptions)
@@ -38,16 +42,13 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token')
-  }
-
-  isAuth(): boolean {
-    const token = localStorage.getItem('token')
-    return !!token
+    this.isAuth.next(false)
   }
 
   private setToken(resp: RegisterResponseDto): void {
     if (resp.success && resp.token) {
       localStorage.setItem('token', resp.token)
+      this.isAuth.next(true)
     }
   }
 

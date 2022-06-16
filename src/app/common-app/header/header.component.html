@@ -1,6 +1,16 @@
 <div class="header">
   <nav>
     <a routerLink="/products" routerLinkActive="active">Products</a>
-    <a routerLink="/login" routerLinkActive="active">Login</a>
   </nav>
+
+  <div class="auth-block">
+    <button routerLink="/login" *ngIf="!isAuth">
+      <span>Login</span>
+      <mat-icon>login</mat-icon>
+    </button>
+    <button (click)="logout()" *ngIf="isAuth">
+      Logout
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
 </div>

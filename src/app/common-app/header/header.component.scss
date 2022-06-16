@@ -12,17 +12,26 @@
 
     a {
       color: white;
-      display: block;
       text-decoration: none;
+      display: block;
       margin: 10px ;
     }
 
     a.active {
       border-bottom: 2px solid white;
     }
+  }
 
-    :last-child {
-      margin-left: auto;
+  .auth-block {
+    margin-left: auto;
+
+    button {
+      border: none;
+      background: transparent;
+      color: white;
+      display: flex;
+      align-items: center;
     }
   }
 }
+

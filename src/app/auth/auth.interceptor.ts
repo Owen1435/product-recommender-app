@@ -8,11 +8,14 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(
+    private router: Router,
+  ) {}
 
   intercept( req: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('token')
@@ -28,8 +31,8 @@ export class AuthInterceptor implements HttpInterceptor {
         },
         (err) => {
           if (err instanceof HttpErrorResponse) {
-            if (err.status == 401)
-              console.log('Unauthorized', err)
+            console.log('Error response', err)
+            err.status == 401 && this.router.navigate(['/login'])
           }
         }
       )
